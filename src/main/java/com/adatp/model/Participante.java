@@ -1,4 +1,4 @@
-package adatp.model;
+package com.adatp.model;
 
 import java.sql.Date;
 

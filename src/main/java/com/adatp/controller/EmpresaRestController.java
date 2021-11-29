@@ -1,4 +1,4 @@
-package adatp.controller;
+package com.adatp.controller;
 
 import java.util.Optional;
 
@@ -9,22 +9,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import adatp.model.Empresa;
-import adatp.service.EmpresaService;
+import com.adatp.model.Empresa;
+import com.adatp.service.EmpresaService;
 
 @RestController
+@RequestMapping("/v2")
 public class EmpresaRestController {
 	@Autowired
 	EmpresaService empresaService;
 
-	@GetMapping("/v2/empresas")
+	@GetMapping("/empresas")
 	public Iterable<Empresa> listadoEmpresas() {
 		return empresaService.findAll();
 	}
 
-	@GetMapping("/v2/empresas{id}")
+	@GetMapping("/empresas{id}")
 
 	public Optional<Empresa> listadoEmpresassPorId(@PathVariable int id) {
 		return empresaService.findById(id);
@@ -37,13 +39,11 @@ public class EmpresaRestController {
 
 	@PostMapping("/empresas")
 	public Empresa insertarEmpresa(@RequestBody Empresa form) {
-
 		return empresaService.save(form);
 	}
 
 	@PutMapping("/empresas")
 	public Empresa modificarEmpresa(@RequestBody Empresa form) {
-
 		return empresaService.save(form);
 	}
 

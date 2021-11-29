@@ -1,4 +1,4 @@
-package adatp.model;
+package com.adatp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +26,10 @@ public class Curso {
 	@ManyToOne
 	@JoinColumn(name = "representante", nullable = false)
 	private Representante representante;
+
+	@ManyToOne
+	@JoinColumn(name = "empresa", nullable = false)
+	private Empresa empresa;
 
 	@ManyToOne
 	@JoinColumn(name = "participante", nullable = false)

@@ -1,8 +1,8 @@
-package adatp.repository;
+package com.adatp.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import adatp.model.Empresa;
+import com.adatp.model.Empresa;
 
 public interface EmpresaRepository extends CrudRepository<Empresa, Integer> {
 

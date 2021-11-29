@@ -1,4 +1,4 @@
-package adatp;
+package com.adatp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

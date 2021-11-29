@@ -1,4 +1,4 @@
-package adatp.model;
+package com.adatp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,16 +9,14 @@ import lombok.Data;
 
 @Data
 @Entity
-
-public class Representante {
+public class Socioeconomico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String nombre;
-	private String apellido;
-	private String dni;
-	private String mail;
-	private String cargo;
+	private boolean estudia;
+	private boolean trabaja;
+	private double ingresos;
+	private int familiaCargo;
 
 }

@@ -1,4 +1,4 @@
-package adatp.model;
+package com.adatp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,5 +28,21 @@ public class Empresa {
 	@ManyToOne
 	@JoinColumn(name = "representante", nullable = false)
 	private Representante representante;
+
+	public Empresa(int id, String nombre, int cuil, String tipoEmpresa, String direccion, String categoria,
+			int añoFundacion, int numContacto, Representante representante) {
+		this.id = id;
+		this.nombre = nombre;
+		this.cuil = cuil;
+		this.tipoEmpresa = tipoEmpresa;
+		this.direccion = direccion;
+		this.categoria = categoria;
+		this.añoFundacion = añoFundacion;
+		this.numContacto = numContacto;
+		this.representante = representante;
+	}
+
+	public Empresa() {
+	}
 
 }
