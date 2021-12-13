@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -17,6 +15,7 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
 	private String nombre;
 	private int cuil;
 	private String tipoEmpresa;
@@ -25,12 +24,8 @@ public class Empresa {
 	private int añoFundacion;
 	private int numContacto;
 
-	@ManyToOne
-	@JoinColumn(name = "representante", nullable = false)
-	private Representante representante;
-
 	public Empresa(int id, String nombre, int cuil, String tipoEmpresa, String direccion, String categoria,
-			int añoFundacion, int numContacto, Representante representante) {
+			int añoFundacion, int numContacto) {
 		this.id = id;
 		this.nombre = nombre;
 		this.cuil = cuil;
@@ -39,7 +34,6 @@ public class Empresa {
 		this.categoria = categoria;
 		this.añoFundacion = añoFundacion;
 		this.numContacto = numContacto;
-		this.representante = representante;
 	}
 
 	public Empresa() {

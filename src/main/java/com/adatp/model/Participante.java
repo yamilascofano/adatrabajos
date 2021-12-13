@@ -1,13 +1,9 @@
 package com.adatp.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -20,11 +16,19 @@ public class Participante {
 	private int id;
 	private String nombre;
 	private String apellido;
-	private Date fechaNacimiento;
+	private int fechaNacimiento;
 	private String genero;
 	private String residencia;
 
-	@ManyToOne
-	@JoinColumn(name = "socioeconomico", nullable = false)
-	private Socioeconomico socioeconomico;
+	public Participante(int id, String nombre, String apellido, int fechaNacimiento, String genero, String residencia) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.genero = genero;
+		this.residencia = residencia;
+	}
+
+	public Participante() {
+	}
 }

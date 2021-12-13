@@ -32,6 +32,13 @@ public class EmpresaRestController {
 		return empresaService.findById(id);
 	}
 
+	@GetMapping("/empresa")
+
+	// public Iterable<Empresa> listadoPorRepresentante(@RequestParam int
+	// idRepresentante) {
+	// return empresaService.findByRepresentante(idRepresentante);
+	// }
+
 	@DeleteMapping("/empresas/{id}")
 	public void borrarEmpresaPorId(@PathVariable int id) {
 		empresaService.deleteById(id);

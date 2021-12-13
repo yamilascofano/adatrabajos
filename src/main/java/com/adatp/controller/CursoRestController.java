@@ -22,6 +22,11 @@ public class CursoRestController {
 	@Autowired
 	CursoService cursoService;
 
+	@GetMapping("/curso")
+	public Iterable<Curso> listadoCursos() {
+		return cursoService.findAll();
+	}
+
 	@GetMapping("/cursos")
 	public Iterable<Curso> listadoPorEmpresa(@RequestParam int idEmpresa) {
 		return cursoService.findByEmpresa(idEmpresa);
@@ -32,8 +37,8 @@ public class CursoRestController {
 		return cursoService.findById(id);
 	}
 
-	@PostMapping("cursos")
-	public Curso insertarEmpresa(@RequestBody Curso form) {
+	@PostMapping("/cursos")
+	public Curso insertarCurso(@RequestBody Curso form) {
 		return cursoService.save(form);
 	}
 

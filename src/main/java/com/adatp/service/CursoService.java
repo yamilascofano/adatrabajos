@@ -13,6 +13,8 @@ import com.adatp.repository.CursoRepository;
 public class CursoService {
 	@Autowired
 	CursoRepository cursoRepository;
+	@Autowired
+	EmpresaService empresaService;
 
 	public Iterable<Curso> findByEmpresa(int idEmpresa) {
 		Empresa empresa = new Empresa();
@@ -20,8 +22,16 @@ public class CursoService {
 		return cursoRepository.findByEmpresa(empresa);
 	}
 
-	public Optional<Curso> findById(int id) {
-		return cursoRepository.findById(id);
+	/*
+	 * public Iterable<Curso> findByParticipante(String apellidoParticipante) {
+	 * Participante participante = new Participante();
+	 * participante.setApellido(apellidoParticipante); return
+	 * cursoRepository.findByParticipante(participante); }
+	 */
+
+	public Optional<Curso> findById(int idCurso) {
+		Optional<Curso> curso = cursoRepository.findById(idCurso);
+		return curso;
 	}
 
 	public void deleteById(int id) {
@@ -30,6 +40,10 @@ public class CursoService {
 
 	public Curso save(Curso form) {
 		return cursoRepository.save(form);
+	}
+
+	public Iterable<Curso> findAll() {
+		return cursoRepository.findAll();
 	}
 
 }

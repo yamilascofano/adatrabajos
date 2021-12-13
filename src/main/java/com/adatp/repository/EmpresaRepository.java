@@ -6,4 +6,6 @@ import com.adatp.model.Empresa;
 
 public interface EmpresaRepository extends CrudRepository<Empresa, Integer> {
 
+	// Iterable<Empresa> findByRepresentante(Representante representante);
+
 }

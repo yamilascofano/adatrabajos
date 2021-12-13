@@ -9,14 +9,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Socioeconomico {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private boolean estudia;
-	private boolean trabaja;
-	private double ingresos;
-	private int familiaCargo;
-
+	private String usuario;
+	private String contraseña;
+	private String rol;
 }

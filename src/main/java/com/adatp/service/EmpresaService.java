@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.adatp.model.Empresa;
 import com.adatp.repository.EmpresaRepository;
-import com.adatp.repository.RepresentanteRepository;
 
 @Service
 public class EmpresaService {
 	@Autowired
 	EmpresaRepository empresaRepository;
 	@Autowired
-	RepresentanteRepository representanteRepository;
+	RepresentanteService representanteService;
 
 	public Iterable<Empresa> findAll() {
 		return empresaRepository.findAll();
@@ -32,9 +31,10 @@ public class EmpresaService {
 		return empresaRepository.save(empresa);
 	}
 
-	/*
-	 * public Representante save(Representante representante) { return
-	 * representanteRepository.save(representante); }
-	 */
+	// public Iterable<Empresa> findByRepresentante(int idRepresentante) {
+	// Representante representante = new Representante();
+	// representante.setId(idRepresentante);
+	// return empresaRepository.findByRepresentante(representante);
+	// }
 
 }
