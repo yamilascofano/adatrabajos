@@ -28,6 +28,10 @@ public class Representante {
 	@JoinColumn(name = "empresa", nullable = false)
 	private Empresa empresas;
 
+	@ManyToOne
+	@JoinColumn(name = "usuario", nullable = false)
+	private Usuario usuario;
+
 	public Representante() {
 	}
 

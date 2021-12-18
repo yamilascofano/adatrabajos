@@ -20,13 +20,20 @@ public class Beca {
 	private boolean trabaja;
 	private int ingresos;
 	private int familiaCargo;
-
-	@ManyToOne
-	@JoinColumn(name = "curso", nullable = false)
-	private Curso curso;
-
 	@ManyToOne
 	@JoinColumn(name = "participante", nullable = false)
 	private Participante participante;
 
+	public Beca(int id, boolean estudia, boolean trabaja, int ingresos, int familiaCargo, Participante participante) {
+
+		this.id = id;
+		this.estudia = estudia;
+		this.trabaja = trabaja;
+		this.ingresos = ingresos;
+		this.familiaCargo = familiaCargo;
+		this.participante = participante;
+	}
+
+	public Beca() {
+	}
 }

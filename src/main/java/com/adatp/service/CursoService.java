@@ -20,18 +20,12 @@ public class CursoService {
 		Empresa empresa = new Empresa();
 		empresa.setId(idEmpresa);
 		return cursoRepository.findByEmpresa(empresa);
+
 	}
 
-	/*
-	 * public Iterable<Curso> findByParticipante(String apellidoParticipante) {
-	 * Participante participante = new Participante();
-	 * participante.setApellido(apellidoParticipante); return
-	 * cursoRepository.findByParticipante(participante); }
-	 */
-
 	public Optional<Curso> findById(int idCurso) {
-		Optional<Curso> curso = cursoRepository.findById(idCurso);
-		return curso;
+		return cursoRepository.findById(idCurso);
+
 	}
 
 	public void deleteById(int id) {

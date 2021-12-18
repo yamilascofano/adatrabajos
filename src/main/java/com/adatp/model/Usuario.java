@@ -16,5 +16,13 @@ public class Usuario {
 	private int id;
 	private String usuario;
 	private String contraseña;
-	private String rol;
+
+	/*
+	 * @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL) private
+	 * Participante participante;
+	 * 
+	 * @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL) private
+	 * Representante representante;
+	 */
+
 }

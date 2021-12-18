@@ -16,8 +16,7 @@ public class Inscripcion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private boolean tieneBeca;
-
+	private int porcentajeBecas;
 	@ManyToOne
 	@JoinColumn(name = "participante", nullable = false)
 	private Participante participante;
@@ -28,4 +27,14 @@ public class Inscripcion {
 	@JoinColumn(name = "beca", nullable = false)
 	private Beca beca;
 
+	public Inscripcion(int id, Participante participante, Curso curso, Beca beca) {
+		this.id = id;
+		this.participante = participante;
+		this.curso = curso;
+		this.beca = beca;
+	}
+
+	public Inscripcion() {
+
+	}
 }

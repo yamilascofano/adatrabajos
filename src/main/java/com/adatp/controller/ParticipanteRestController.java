@@ -38,13 +38,13 @@ public class ParticipanteRestController {
 	}
 
 	@PostMapping("/participantes")
-	public Participante insertarParticipante(@RequestBody Participante form) {
-		return participanteService.save(form);
+	public Participante insertarParticipante(@RequestBody Participante participante) {
+		return participanteService.save(participante);
 	}
 
 	@PutMapping("/participantes")
-	public Participante modificarParticipante(@RequestBody Participante form) {
-		return participanteService.save(form);
+	public Participante modificarParticipante(@RequestBody Participante participante) {
+		return participanteService.save(participante);
 	}
 
 }

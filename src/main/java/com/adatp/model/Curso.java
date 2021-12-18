@@ -24,9 +24,10 @@ public class Curso {
 	private int horas;
 	private String categorias;
 	private int numParticipantes;
+	private int cupoBeca;
 
 	public Curso(int id, String nombre, String descripcion, String modalidad, int costo, int horas, String categorias,
-			int numParticipantes, Empresa empresa, Representante representante) {
+			int numParticipantes, int cupoBeca, Empresa empresa, Representante representante) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -35,6 +36,7 @@ public class Curso {
 		this.horas = horas;
 		this.categorias = categorias;
 		this.numParticipantes = numParticipantes;
+		this.cupoBeca = cupoBeca;
 		this.empresa = empresa;
 		this.representante = representante;
 	}
