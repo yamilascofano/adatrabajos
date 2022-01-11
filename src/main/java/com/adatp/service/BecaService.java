@@ -3,9 +3,11 @@ package com.adatp.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.adatp.model.Beca;
+import com.adatp.model.BecaForm;
 import com.adatp.model.Participante;
 import com.adatp.repository.BecaRepository;
 import com.adatp.repository.ParticipanteRepository;
@@ -27,19 +29,19 @@ public class BecaService {
 		return becaRepository.findById(id);
 	}
 
-	public Beca save(int idParticipante) throws Exception {
+	public Beca save(BecaForm form) throws Exception {
 		Beca beca = new Beca();
-		Optional<Participante> par = participanteService.findById(idParticipante);
+		Optional<Participante> par = participanteService.findById(form.getIdParticipante());
 		Participante participante = par.get();
 		if (!par.isPresent()) {
 			throw new Exception("No existe participante con ese id");
 		} else {
 			if (participante.isTieneBeca() == true) {
 				beca.setParticipante(participante);
-				beca.setEstudia(beca.isEstudia());
-				beca.setFamiliaCargo(beca.getFamiliaCargo());
-				beca.setIngresos(beca.getIngresos());
-				beca.setTrabaja(beca.isTrabaja());
+				beca.setEstudia(form.isEstudia());
+				beca.setFamiliaCargo(form.getFamiliaCargo());
+				beca.setIngresos(form.getIngresos());
+				beca.setTrabaja(form.isTrabaja());
 			}
 		}
 		return becaRepository.save(beca);
@@ -50,12 +52,13 @@ public class BecaService {
 
 	}
 
-	public Beca findByParticipante(int idParticipante) {
+	public Optional<Beca> findByParticipante(int idParticipante) {
 		Participante participante = new Participante();
 		participante.setId(idParticipante);
-		Optional<Beca> be = becaRepository.findByParticipante(participante);
-		Beca beca = be.get();
-		return beca;
+		Beca beca = new Beca();
+		beca.setParticipante(participante);
+		Example<Beca> be = Example.of(beca);
+		return becaRepository.findOne(be);
 	}
 
 }
