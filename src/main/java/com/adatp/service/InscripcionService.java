@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.adatp.model.Beca;
 import com.adatp.model.Curso;
 import com.adatp.model.Inscripcion;
+import com.adatp.model.InscripcionForm;
 import com.adatp.model.Participante;
 import com.adatp.repository.BecaRepository;
 import com.adatp.repository.InscripcionRepository;
@@ -28,55 +29,48 @@ public class InscripcionService {
 	@Autowired
 	ParticipanteRepository participanteRepository;
 
-	public Inscripcion save(int idParticipante, int idCurso) throws Exception {
+	public Inscripcion save(InscripcionForm form) throws Exception {
 		Inscripcion inscripcion = new Inscripcion();
-		Optional<Curso> curso = cursoService.findById(idCurso);
+		Optional<Curso> curso = cursoService.findById(form.getIdCurso());
 		Curso cur = curso.get();
 		if (!curso.isPresent()) {
 			throw new Exception("El curso no existe");
 		} else {
 			inscripcion.setCurso(cur);
-			Optional<Participante> par = participanteService.findById(idParticipante);
+			Optional<Participante> par = participanteService.findById(form.getIdParticipante());
 			Participante participante = par.get();
 			if (!par.isPresent()) {
 				throw new Exception("No existe participante con ese id");
 			} else {
 				inscripcion.setParticipante(participante);
 			}
-			Beca be = becaService.findByParticipante(idParticipante);
-			if (be == null) {
-				throw new Exception("Participante no tiene beca");
+			Optional<Beca> be = becaService.findByParticipante(form.getIdParticipante());
+			Beca beca = be.get();
+			if (beca != null) {
+				throw new Exception("Participante ya tiene beca");
 			}
-			inscripcion.setBeca(be);
+			inscripcion.setBeca(beca);
+
 		}
 		return inscripcionRepository.save(inscripcion);
 	}
 
-	public Inscripcion crearDirecta(int idParticipante, int idCurso) throws Exception {
-		Inscripcion inscripcion = new Inscripcion();
-		Optional<Curso> curso = cursoService.findById(idCurso);
-		Curso cur = curso.get();
-		if (!curso.isPresent()) {
-			throw new Exception("El curso no existe");
-		} else {
-			if (cur.getNumParticipantes() == 0) {
-				throw new Exception("No hay cupo");
-			} else {
-				inscripcion.setCurso(cur);
-				Optional<Participante> par = participanteService.findById(idParticipante);
-				Participante participante = par.get();
-				if (!par.isPresent()) {
-					throw new Exception("No existe participante con ese id");
-				} else {
-					if (participante.isTieneBeca() == false) {
-						inscripcion.setParticipante(participante);
-					}
-				}
-			}
-		}
-		return inscripcionRepository.save(inscripcion);
-
-	}
+	/*
+	 * public Inscripcion crearDirecta(int idParticipante, int idCurso) throws
+	 * Exception { Inscripcion inscripcion = new Inscripcion(); Optional<Curso>
+	 * curso = cursoService.findById(idCurso); Curso cur = curso.get(); if
+	 * (!curso.isPresent()) { throw new Exception("El curso no existe"); } else { if
+	 * (cur.getNumParticipantes() == 0) { throw new Exception("No hay cupo"); } else
+	 * { inscripcion.setCurso(cur); Optional<Participante> par =
+	 * participanteService.findById(idParticipante); Participante participante =
+	 * par.get(); if (!par.isPresent()) { throw new
+	 * Exception("No existe participante con ese id"); } else { if
+	 * (participante.isTieneBeca() == false) {
+	 * inscripcion.setParticipante(participante); } } } } return
+	 * inscripcionRepository.save(inscripcion);
+	 * 
+	 * }
+	 */
 
 	public void deleteById(int id) {
 		inscripcionRepository.deleteById(id);
