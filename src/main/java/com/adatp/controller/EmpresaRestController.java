@@ -1,7 +1,5 @@
 package com.adatp.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,44 +10,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adatp.Excepciones.NoAutorizadoException;
+import com.adatp.Excepciones.NoUsuarioException;
+import com.adatp.form.EmpresaForm;
 import com.adatp.model.Empresa;
 import com.adatp.service.EmpresaService;
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/v1/empresas")
 public class EmpresaRestController {
 	@Autowired
 	EmpresaService empresaService;
 
-	@GetMapping("/empresas")
+	@GetMapping("/")
 	public Iterable<Empresa> listadoEmpresas() {
 		return empresaService.findAll();
 	}
 
-	@GetMapping("/empresas{id}")
-
-	public Optional<Empresa> listadoEmpresassPorId(@PathVariable int id) {
-		return empresaService.findById(id);
-	}
-
-	@GetMapping("/empresa")
-
-	// public Iterable<Empresa> listadoPorRepresentante(@RequestParam int
-	// idRepresentante) {
-	// return empresaService.findByRepresentante(idRepresentante);
-	// }
-
-	@DeleteMapping("/empresas/{id}")
+	@DeleteMapping("/{id}")
 	public void borrarEmpresaPorId(@PathVariable int id) {
 		empresaService.deleteById(id);
 	}
 
-	@PostMapping("/empresas")
+	@PostMapping("/insertar")
 	public Empresa insertarEmpresa(@RequestBody Empresa form) {
 		return empresaService.save(form);
 	}
 
-	@PutMapping("/empresas")
+	@PostMapping("/aprobar")
+	public Empresa aprobarEmpresa(@RequestBody EmpresaForm form) throws NoUsuarioException, NoAutorizadoException {
+		return empresaService.aprobar(form);
+	}
+
+	@PutMapping("/")
 	public Empresa modificarEmpresa(@RequestBody Empresa form) {
 		return empresaService.save(form);
 	}
