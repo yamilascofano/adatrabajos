@@ -15,7 +15,7 @@ import com.adatp.service.UsuarioService;
 
 @RestController
 @RequestMapping("/v1/usuarios")
-public class UsuarioController {
+public class UsuarioRestController {
 	@Autowired
 	UsuarioService usuarioService;
 
