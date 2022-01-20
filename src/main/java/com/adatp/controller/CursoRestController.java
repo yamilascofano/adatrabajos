@@ -13,41 +13,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adatp.Excepciones.NoAutorizadoException;
+import com.adatp.form.CursoForm;
 import com.adatp.model.Curso;
 import com.adatp.service.CursoService;
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/v1/cursos")
 public class CursoRestController {
 	@Autowired
 	CursoService cursoService;
 
-	@GetMapping("/curso")
-	public Iterable<Curso> listadoCursos() {
-		return cursoService.findAll();
-	}
-
-	@GetMapping("/cursos")
-	public Iterable<Curso> listadoPorEmpresa(@RequestParam int idEmpresa) {
+	@GetMapping("/empresa/")
+	public Optional<Curso> listadoPorEmpresa(@RequestParam int idEmpresa) {
 		return cursoService.findByEmpresa(idEmpresa);
 	}
 
-	@GetMapping("/cursos/{id}")
-	public Optional<Curso> listadoPorId(@PathVariable int id) {
+	@GetMapping("/{id}")
+	public Optional<Curso> FindById(@PathVariable int id) {
 		return cursoService.findById(id);
 	}
 
-	@PostMapping("/cursos")
-	public Curso insertarCurso(@RequestBody Curso form) {
+	@GetMapping("/listar")
+	public Iterable<Curso> ListadoCursos() {
+		return cursoService.findAll();
+	}
+
+	@PostMapping("/")
+	public Curso insertarCurso(@RequestBody CursoForm form) throws NoAutorizadoException {
 		return cursoService.save(form);
 	}
 
-	@PutMapping("/cursos")
-	public Curso modificarCurso(@RequestBody Curso form) {
+	@PutMapping("/")
+	public Curso modificarCurso(@RequestBody CursoForm form) throws NoAutorizadoException {
 		return cursoService.save(form);
 	}
 
-	@DeleteMapping("/cursos/{id}")
+	@DeleteMapping("/{id}")
 	public void borrarCursoPorId(@PathVariable int id) {
 		cursoService.deleteById(id);
 	}
