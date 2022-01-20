@@ -1,7 +1,5 @@
 package com.adatp.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,39 +10,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adatp.Excepciones.NoAutorizadoException;
+import com.adatp.Excepciones.NoUsuarioException;
+import com.adatp.form.RepresentanteForm;
 import com.adatp.model.Representante;
 import com.adatp.service.RepresentanteService;
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/v1/representantes")
 public class RepresentanteRestController {
 
 	@Autowired
 	RepresentanteService representanteService;
 
-	@GetMapping("/representante")
+	@GetMapping("/")
 	public Iterable<Representante> listadoRepresentantes() {
 		return representanteService.findAll();
 	}
 
-	@GetMapping("/representante/{id}")
-	public Optional<Representante> listadoPorId(@PathVariable int id) {
-		return representanteService.findById(id);
-	}
-
-	@PostMapping("/representante")
-	public Representante insertarRepresentante(@RequestBody Representante form) {
+	@PostMapping("/")
+	public Representante insertarRepresentante(@RequestBody RepresentanteForm form)
+			throws NoUsuarioException, NoAutorizadoException {
 		return representanteService.save(form);
 	}
 
-	@PutMapping("/representante")
-	public Representante modificarRepresentante(@RequestBody Representante form) {
+	@PutMapping("/")
+	public Representante modificarRepresentante(@RequestBody RepresentanteForm form)
+			throws NoUsuarioException, NoAutorizadoException {
 		return representanteService.save(form);
 	}
 
-	@DeleteMapping("/representante/{id}")
+	@DeleteMapping("/{id}")
 	public void borrarRepresentantePorId(@PathVariable int id) {
 		representanteService.deleteById(id);
 	}
-
 }
