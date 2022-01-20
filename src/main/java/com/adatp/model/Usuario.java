@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.adatp.form.enums.Rol;
+
 import lombok.Data;
 
 @Data
@@ -16,13 +18,6 @@ public class Usuario {
 	private int id;
 	private String usuario;
 	private String contraseña;
-
-	/*
-	 * @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL) private
-	 * Participante participante;
-	 * 
-	 * @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL) private
-	 * Representante representante;
-	 */
+	private Rol rol;
 
 }

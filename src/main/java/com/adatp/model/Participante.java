@@ -22,10 +22,11 @@ public class Participante {
 	private String genero;
 	private String residencia;
 	private boolean tieneBeca;
-	@ManyToOne
-
-	@JoinColumn(name = "beca", nullable = true)
-	private Beca beca;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "beca", nullable = true) private Beca beca;
+	 */
 	@ManyToOne
 	@JoinColumn(name = "usuario", nullable = false)
 	private Usuario usuario;

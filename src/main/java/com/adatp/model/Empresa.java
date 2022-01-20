@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.adatp.form.enums.Estado;
+
 import lombok.Data;
 
 @Data
@@ -23,9 +25,10 @@ public class Empresa {
 	private String categoria;
 	private int añoFundacion;
 	private int numContacto;
+	private Estado estado;
 
 	public Empresa(int id, String nombre, int cuil, String tipoEmpresa, String direccion, String categoria,
-			int añoFundacion, int numContacto) {
+			int añoFundacion, int numContacto, Estado estado) {
 		this.id = id;
 		this.nombre = nombre;
 		this.cuil = cuil;
@@ -34,6 +37,7 @@ public class Empresa {
 		this.categoria = categoria;
 		this.añoFundacion = añoFundacion;
 		this.numContacto = numContacto;
+		this.estado = estado;
 	}
 
 	public Empresa() {

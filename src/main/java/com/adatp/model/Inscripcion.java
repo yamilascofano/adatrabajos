@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.adatp.form.enums.ModoPago;
+
 import lombok.Data;
 
 @Data
@@ -16,25 +18,25 @@ public class Inscripcion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int porcentajeBecas;
 	@ManyToOne
 	@JoinColumn(name = "participante", nullable = false)
 	private Participante participante;
 	@ManyToOne
 	@JoinColumn(name = "curso", nullable = false)
 	private Curso curso;
-	@ManyToOne
-	@JoinColumn(name = "beca", nullable = false)
-	private Beca beca;
+	private ModoPago modoPago;
+	private int cupo;
 
-	public Inscripcion(int id, Participante participante, Curso curso, Beca beca) {
+	public Inscripcion(int id, Participante participante, Curso curso, ModoPago modoPago, int cupo) {
 		this.id = id;
 		this.participante = participante;
 		this.curso = curso;
-		this.beca = beca;
+		this.modoPago = modoPago;
+		this.cupo = cupo;
 	}
 
 	public Inscripcion() {
 
 	}
+
 }

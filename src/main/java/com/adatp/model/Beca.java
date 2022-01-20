@@ -36,4 +36,5 @@ public class Beca {
 
 	public Beca() {
 	}
+
 }
