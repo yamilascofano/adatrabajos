@@ -1,7 +1,5 @@
 package com.adatp.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,39 +10,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adatp.Excepciones.NoAutorizadoException;
+import com.adatp.Excepciones.NoUsuarioException;
+import com.adatp.form.ParticipanteForm;
 import com.adatp.model.Participante;
 import com.adatp.service.ParticipanteService;
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/v1/participantes")
 public class ParticipanteRestController {
 	@Autowired
 	ParticipanteService participanteService;
 
-	@GetMapping("/participantes")
+	@GetMapping("/")
 	public Iterable<Participante> listadoParticipantes() {
 		return participanteService.findAll();
 	}
 
-	@GetMapping("/participantes{id}")
-
-	public Optional<Participante> listadoParticipantesPorId(@PathVariable int id) {
-		return participanteService.findById(id);
-	}
-
-	@DeleteMapping("/participantes/{id}")
+	@DeleteMapping("/{id}")
 	public void borrarParticipantePorId(@PathVariable int id) {
 		participanteService.deleteById(id);
 	}
 
-	@PostMapping("/participantes")
-	public Participante insertarParticipante(@RequestBody Participante participante) {
-		return participanteService.save(participante);
+	@PostMapping("/")
+	public Participante insertarParticipante(@RequestBody ParticipanteForm form)
+			throws NoUsuarioException, NoAutorizadoException {
+		return participanteService.save(form);
 	}
 
-	@PutMapping("/participantes")
-	public Participante modificarParticipante(@RequestBody Participante participante) {
-		return participanteService.save(participante);
+	@PutMapping("/")
+	public Participante modificarParticipante(@RequestBody ParticipanteForm form)
+			throws NoUsuarioException, NoAutorizadoException {
+		return participanteService.save(form);
 	}
 
 }
